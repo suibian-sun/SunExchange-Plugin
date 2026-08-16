@@ -8,7 +8,7 @@
 
 | 适用端 | 平台标识 | 服务端类型 | 插件形态 |
 | --- | --- | --- | --- |
-| 网易我的世界 | `netease` | FunShuttler / 网易租赁服 | 网易 funcs 插件 / 脚本 |
+| 网易我的世界 | `netease` | 网易租赁服 | 网易 funcs 插件 / 脚本 |
 | 国际 Java 版 | `java` | Spigot / Paper / Purpur（Bukkit） | `.jar` |
 | 国际基岩版 | `bedrock` | BDS / Nukkit / PocketMine | `.jar` / `.js` / 插件文件夹 |
 
