@@ -17,7 +17,7 @@ SunExchange 插件市场把两类插件合并到一个注册表，靠**分类**�
 
 | 适用端 | 平台标识 | 典型服务端 | 插件形态 |
 | --- | --- | --- | --- |
-| 网易我的世界 | `netease` | FunShuttler / 网易租赁服 | 网易 funcs 插件 / 脚本 |
+| 网易我的世界 | `netease` | 网易租赁服 | 网易 funcs 插件 / 脚本 |
 | 国际 Java 版 | `java` | Spigot / Paper / Purpur | `.jar` |
 | 国际基岩版 | `bedrock` | BDS / Nukkit / PocketMine | `.jar` / `.js` / 插件文件夹 |
 
