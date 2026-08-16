@@ -1,6 +1,6 @@
 # 服务器端插件制作指南
 
-本指南说明如何为 SunExchange 统一插件市场制作 **Minecraft 服务器端插件**。服务器端插件参考 [cat7street/FIN-plugin](https://github.com/cat7street/FIN-plugin) 的跨平台插件框架设计，同时支持经典 Bukkit 服务端插件与网易 FunShuttler 脚本。
+本指南说明如何为 SunExchange 统一插件市场制作 **Minecraft 服务器端插件**。服务器端插件参考 [maoqijie/FIN-plugin](https://github.com/maoqijie/FIN-plugin) 的跨平台插件框架设计，同时支持经典 Bukkit 服务端插件与网易 FunShuttler 脚本。
 
 ## 一、插件分类与适用端
 
@@ -87,7 +87,7 @@
 
 ## 四、使用 FIN 跨平台框架（推荐）
 
-FIN 插件框架（`cat7street/FIN-plugin`）支持跨平台插件系统（Windows/Linux/macOS/Android），一套 Go 代码跑通三个适用端，进程隔离、跨端一致。
+FIN 插件框架（`maoqijie/FIN-plugin`）支持跨平台插件系统（Windows/Linux/macOS/Android），一套 Go 代码跑通三个适用端，进程隔离、跨端一致。
 
 ### 4.1 生命周期与事件监听
 
@@ -95,23 +95,49 @@ FIN 插件框架（`cat7street/FIN-plugin`）支持跨平台插件系统（Windo
 package main
 
 import (
-    "github.com/cat7street/FIN-plugin/sdk"
-    "github.com/cat7street/FIN-plugin/sdk/plugin"
+    "github.com/hashicorp/go-plugin"
+    "github.com/maoqijie/FIN-plugin/sdk"
 )
 
-type Plugin struct{}
+type MyPlugin struct{ ctx *sdk.Context }
 
-func (p *Plugin) OnLoad(ctx *sdk.Context) error {
+// Init 是插件入口：注册命令、监听事件均在此时完成
+func (p *MyPlugin) Init(ctx *sdk.Context) error {
+    p.ctx = ctx
+    // 注册控制台命令
+    ctx.RegisterConsoleCommand(sdk.ConsoleCommand{
+        Name: "mycmd",
+        Handler: func(args []string) error {
+            ctx.LogInfo("命令执行")
+            return nil
+        },
+    })
+    // 监听玩家加入
     ctx.ListenPlayerJoin(func(event sdk.PlayerEvent) {
         ctx.LogSuccess("玩家 %s 加入", event.Name)
     })
+    // 监听聊天（*ChatEvent 可置 Cancelled=true 拦截转发）
     ctx.ListenChat(func(event *sdk.ChatEvent) {
         ctx.LogInfo("%s: %s", event.Sender, event.Message)
     })
     return nil
 }
 
-func main() { plugin.Serve(&Plugin{}) }
+func (p *MyPlugin) Start() error { return nil }
+func (p *MyPlugin) Stop() error  { return nil }
+func (p *MyPlugin) GetInfo() sdk.PluginInfo {
+    return sdk.PluginInfo{Name: "MyPlugin", DisplayName: "我的插件", Version: "1.0.0", Description: "", Author: ""}
+}
+
+func main() {
+    plugin.Serve(&plugin.ServeConfig{
+        HandshakeConfig: sdk.HandshakeConfig,
+        Plugins: map[string]plugin.Plugin{
+            "plugin": &sdk.PluginGRPC{Impl: &MyPlugin{}},
+        },
+        GRPCServer: plugin.DefaultGRPCServer,
+    })
+}
 ```
 
 ### 4.2 游戏控制
@@ -119,7 +145,7 @@ func main() { plugin.Serve(&Plugin{}) }
 ```go
 gu := ctx.GameUtils()
 gu.SayTo("玩家名", "§a你好！")
-gu.Broadcast("§e全服公告")
+gu.SendChat("§e全服公告")
 gu.SendCommand("/give @a diamond 64")
 ```
 

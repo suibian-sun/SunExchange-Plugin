@@ -77,13 +77,14 @@ FIN（FunInterWork）插件框架用 Go 编写，支持 Linux/macOS/Windows/Andr
 package main
 
 import (
-    "github.com/cat7street/FIN-plugin/sdk"
-    "github.com/cat7street/FIN-plugin/sdk/plugin"
+    "github.com/hashicorp/go-plugin"
+    "github.com/maoqijie/FIN-plugin/sdk"
 )
 
-type MyPlugin struct{}
+type MyPlugin struct{ ctx *sdk.Context }
 
-func (p *MyPlugin) OnLoad(ctx *sdk.Context) error {
+func (p *MyPlugin) Init(ctx *sdk.Context) error {
+    p.ctx = ctx
     // 注册控制台命令
     ctx.RegisterConsoleCommand(sdk.ConsoleCommand{
         Name: "mycmd",
@@ -103,7 +104,21 @@ func (p *MyPlugin) OnLoad(ctx *sdk.Context) error {
     return nil
 }
 
-func main() { plugin.Serve(&MyPlugin{}) }
+func (p *MyPlugin) Start() error { return nil }
+func (p *MyPlugin) Stop() error  { return nil }
+func (p *MyPlugin) GetInfo() sdk.PluginInfo {
+    return sdk.PluginInfo{Name: "MyPlugin", DisplayName: "我的插件", Version: "1.0.0", Description: "", Author: ""}
+}
+
+func main() {
+    plugin.Serve(&plugin.ServeConfig{
+        HandshakeConfig: sdk.HandshakeConfig,
+        Plugins: map[string]plugin.Plugin{
+            "plugin": &sdk.PluginGRPC{Impl: &MyPlugin{}},
+        },
+        GRPCServer: plugin.DefaultGRPCServer,
+    })
+}
 ```
 
 ### 4.2 游戏控制工具
@@ -111,7 +126,7 @@ func main() { plugin.Serve(&MyPlugin{}) }
 ```go
 gu := ctx.GameUtils()
 gu.SayTo("玩家名", "§a你好！")        // 向指定玩家发消息
-gu.Broadcast("§e全服公告")             // 全服广播
+gu.SendChat("§e全服公告")             // 全服广播
 gu.SendCommand("/give @a diamond 64") // 执行服务端命令
 ```
 
