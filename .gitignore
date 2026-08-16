@@ -1,0 +1,16 @@
+# 编译产物
+*.so
+*.exe
+*.test
+/bin/
+/dist/
+/cli/cli
+/examples/server/entry/entry
+/examples/netease/basic/netease
+
+# Go 缓存与依赖
+vendor/
+*.sum.bak
+
+# 本地工具
+/tmp/
