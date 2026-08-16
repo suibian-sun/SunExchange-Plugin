@@ -2,7 +2,7 @@
 
 本指南说明如何为 SunExchange 统一插件市场制作 **Minecraft 服务器端插件**。
 服务器端插件参考 [cat7street/FIN-plugin](https://github.com/cat7street/FIN-plugin) 的跨平台插件框架设计，
-同时支持经典服务端插件（Spark/Paper、基岩 Nukkit/BedrockServer、网易 FunShuttler）。
+同时支持经典服务端插件（Spark/Paper、基岩 Nukkit/BedrockServer、网易）。
 
 ## 一、插件分类与适用端
 
