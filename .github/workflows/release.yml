@@ -1,0 +1,27 @@
+name: validate-and-release
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate registry JSON
+        run: |
+          python -m json.tool registry/extensions.json > /dev/null
+          echo "registry JSON 合法"
+      - name: Validate schema
+        run: |
+          pip install jsonschema
+          python - <<'EOF'
+          import json, jsonschema
+          data = json.load(open("registry/extensions.json"))
+          schema = json.load(open("registry/schema.json"))
+          jsonschema.validate(data, schema)
+          print("注册表通过 schema 校验")
+          EOF

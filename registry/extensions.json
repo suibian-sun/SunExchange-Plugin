@@ -1,0 +1,123 @@
+{
+  "$schema": "./schema.json",
+  "description": "SunExchange 统一插件市场注册表：合并 UniBot 扩展（kind=unibot）与 Minecraft 服务器端插件（kind=server）。",
+  "extensions": [
+    {
+      "id": "UniBot.Default",
+      "name": "默认指令模板与资源包",
+      "kind": "unibot",
+      "platforms": ["all"],
+      "category": "模板",
+      "author": "UniBot",
+      "repo": "MineJPGcraft/UniBot.Market",
+      "description": "UniBot 官方默认指令模板与资源包，图片模式默认模板。",
+      "official": true,
+      "icon": "",
+      "releases": [
+        {
+          "version": "latest",
+          "asset_url": "https://github.com/MineJPGcraft/UniBot.Market/releases/latest/download/Default.zip",
+          "sha256": "",
+          "unibot_version": "*"
+        }
+      ]
+    },
+    {
+      "id": "UniBot.Html2Pic",
+      "name": "Html2Pic 渲染引擎",
+      "kind": "unibot",
+      "platforms": ["all"],
+      "category": "渲染引擎",
+      "author": "UniBot",
+      "repo": "MineJPGcraft/UniBot.Market",
+      "description": "将 HTML 渲染为图片的引擎，图片模式必选。",
+      "official": true,
+      "icon": "",
+      "releases": [
+        {
+          "version": "latest",
+          "asset_url": "https://github.com/MineJPGcraft/UniBot.Market/releases/latest/download/Html2Pic.zip",
+          "sha256": "",
+          "unibot_version": "*"
+        }
+      ]
+    },
+    {
+      "id": "UniBot.Placeholder",
+      "name": "Placeholder 占位符桥接",
+      "kind": "unibot",
+      "platforms": ["all"],
+      "category": "API",
+      "author": "UniBot",
+      "repo": "MineJPGcraft/UniBot.Market",
+      "description": "通过 RCON 桥接服务器占位符模组/插件，驱动图片渲染。",
+      "official": true,
+      "icon": "",
+      "releases": [
+        {
+          "version": "latest",
+          "asset_url": "https://github.com/MineJPGcraft/UniBot.Market/releases/latest/download/Placeholder.zip",
+          "sha256": "",
+          "unibot_version": "*"
+        }
+      ]
+    },
+    {
+      "id": "sunexchange.entry",
+      "name": "进服验证插件（全端）",
+      "kind": "server",
+      "platforms": ["netease", "java", "bedrock"],
+      "category": "互通",
+      "author": "SunExchange",
+      "repo": "suibian-sun/SunExchange-Plugin",
+      "description": "服务器端进服入口插件：玩家进服时校验是否已通过商城购买并回写事件到鹊桥，支撑群服互通。",
+      "official": true,
+      "icon": "",
+      "releases": [
+        {
+          "version": "1.0.0",
+          "asset_url": "https://github.com/suibian-sun/SunExchange-Plugin/releases/download/v1.0.0/sunexchange-entry.jar",
+          "sha256": ""
+        }
+      ]
+    },
+    {
+      "id": "sunexchange.placeholder",
+      "name": "占位符与数据桥",
+      "kind": "server",
+      "platforms": ["java", "bedrock"],
+      "category": "互通",
+      "author": "SunExchange",
+      "repo": "suibian-sun/SunExchange-Plugin",
+      "description": "向 UniBot 提供 PlaceholderAPI 占位符数据，配合三位一体渲染。",
+      "official": true,
+      "icon": "",
+      "releases": [
+        {
+          "version": "1.0.0",
+          "asset_url": "https://github.com/suibian-sun/SunExchange-Plugin/releases/download/v1.0.0/sunexchange-placeholder.jar",
+          "sha256": ""
+        }
+      ]
+    },
+    {
+      "id": "fin.economy",
+      "name": "FIN 跨平台经济示例",
+      "kind": "server",
+      "platforms": ["netease", "java", "bedrock"],
+      "category": "经济",
+      "author": "FIN",
+      "repo": "cat7street/FIN-plugin",
+      "description": "基于 FunInterWork 跨平台插件框架的经济系统示例。",
+      "official": false,
+      "icon": "",
+      "releases": [
+        {
+          "version": "0.1.0",
+          "asset_url": "https://github.com/cat7street/FIN-plugin/releases/latest/download/economy.zip",
+          "sha256": ""
+        }
+      ]
+    }
+  ]
+}
