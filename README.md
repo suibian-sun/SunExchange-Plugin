@@ -25,6 +25,7 @@ SunExchange-Plugin/
 | 文档 | 内容 |
 | --- | --- |
 | [插件制作完整指南](docs/plugin-development-guide.md) | 两类插件总览 + 筛选机制 + 发布流程 + 常见问题（推荐先读） |
+| [SunExchange 插件 SDK 开发指南](docs/sdk-plugin-guide.md) | SunExchange 原生插件 SDK：生命周期 + 事件 + 命令 + 插件间 API + 高自由度扩展 |
 | [服务器端插件制作指南](docs/server-plugin-guide.md) | Minecraft 服务器端插件：鹊桥协议 + FIN 框架 + 经典 Bukkit |
 | [UniBot 扩展制作指南](docs/unibot-extension-guide.md) | UniBot 扩展：目录结构 + Extension.toml + 打包上架 |
 
