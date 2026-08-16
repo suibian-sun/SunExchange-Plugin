@@ -14,11 +14,24 @@ SunExchange-Plugin/
 ├── registry/
 │   ├── extensions.json      # 统一插件市场注册表（唯一数据源）
 │   └── schema.json          # 注册表 JSON SCHEMA
-├── plugins/                 # 服务器端插件源码与打包脚本
-│   └── fin-example/         # FIN 跨平台插件示例
-├── docs/                    # 插件制作文档
+├── plugin/                  # 插件源码与打包脚本
+│   ├── server/              # 服务器端插件（国际版 Java/Bedrock 或常驻服务端的跨端插件）
+│   │   └── fin-example/     # FIN 跨平台插件示例
+│   └── netease/             # 网易我的世界端插件
+├── docs/                    # 插件制作文档（指南 + SDK）
 └── .github/workflows/       # 校验 + 打 Release 包
 ```
+
+## 插件分类
+
+`plugin/` 目录按**部署位置**分为两类：
+
+| 分类 | 目录 | 说明 |
+| --- | --- | --- |
+| 服务器端 | `plugin/server/` | 部署在 Minecraft 服务器端：国际版 Java/Bedrock 服务端插件，或常驻服务端的跨端插件 |
+| 我的世界端 | `plugin/netease/` | 部署在网易我的世界（netease）端：租赁服 funcs 脚本、网易专属扩展 |
+
+> 全端插件（同时支持 netease/java/bedrock）通常作为常驻服务端的跨端插件归入 `plugin/server/`。
 
 ## 文档导航
 
@@ -83,7 +96,7 @@ SunExchange 主程序从本仓库的 `registry/extensions.json` 拉取市场数�
 ## 发布新插件
 
 1. 在 `registry/extensions.json` 中新增条目（或添加版本）。
-2. 服务器端插件源码放入 `plugins/`，并配置 Release 打包。
+2. 插件源码放入 `plugin/<分类>/<id>/`（服务器端放 `plugin/server/`，网易端放 `plugin/netease/`），并配置 Release 打包。
 3. 推送 `main` 分支 → GitHub Actions 自动校验注册表并构建 Release。
 4. 在 Releases 页创建 `vX.Y.Z` 标签发布产物，`asset_url` 指向对应 Release。
 

@@ -162,7 +162,7 @@ config.SetDefault("key", "value")
 value := config.GetString("key")
 ```
 
-参考本仓库 `plugins/fin-example/` 的完整示例。
+参考本仓库 `plugin/server/fin-example/` 的完整示例。
 
 ## 五、经典服务端插件（Java/Bukkit）
 
@@ -194,7 +194,7 @@ public final class EntryPlugin extends JavaPlugin implements Listener {
 
 ## 六、发布到市场
 
-1. 将插件源码放入 `plugins/<id>/`（或独立仓库）。
+1. 将插件源码放入 `plugin/server/<id>/`（服务器端）或 `plugin/netease/<id>/`（网易端），或独立仓库。
 2. 在 `registry/extensions.json` 添加条目，`kind` 填 `server`，`platforms` 标注适用端。
 3. 配置 `.github/workflows/release.yml` 构建产物并挂到 Release。
 4. `asset_url` 指向 Release 下载地址，`sha256` 建议填写（平台安装时校验）。

@@ -239,7 +239,7 @@ public final class EntryPlugin extends JavaPlugin implements Listener {
 
 ## 六、发布流程
 
-1. 插件源码放入独立仓库（或本仓库 `plugins/<id>/`），配置 Release 打包。
+1. 插件源码放入独立仓库（或本仓库 `plugin/<分类>/<id>/`，服务器端放 `plugin/server/`，网易端放 `plugin/netease/`），配置 Release 打包。
 2. 在 `registry/extensions.json` 新增条目。
 3. 推送 `main` 分支，GitHub Actions 会自动校验注册表（JSON 合法性 + schema）。
 4. 打 `vX.Y.Z` 标签，生成 Release 资产，把 `asset_url` 指向该资产下载地址。

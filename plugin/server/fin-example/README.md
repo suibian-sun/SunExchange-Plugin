@@ -5,7 +5,7 @@
 ## 结构
 
 ```
-plugins/fin-example/
+plugin/server/fin-example/
 ├── go.mod
 ├── main.go
 └── README.md
@@ -14,7 +14,7 @@ plugins/fin-example/
 ## 构建
 
 ```bash
-cd plugins/fin-example
+cd plugin/server/fin-example
 go build -o sunexchange-entry .
 ```
 
